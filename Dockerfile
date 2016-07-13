@@ -1,15 +1,16 @@
 FROM alpine:latest
 MAINTAINER liubo@huwei123.com
 
-RUN apk --no-cache --no-progress add bash nodejs
-RUN mkdir /app /data
-ADD . /app
-RUN chmod +x /app/start.sh
+RUN apk --no-cache --no-progress add  nodejs
+RUN mkdir  /data
+
 WORKDIR /data
-ADD http://firekylin.org/release/firekylin_0.12.5.tar.gz
+RUN wget http://firekylin.org/release/firekylin_0.12.5.tar.gz
+RUN tar xvf firekylin_0.12.5.tar.gz
 WORKDIR /data/firekylin
 RUN npm install
 
 VOLUME ["/data"]
 EXPOSE 8360
-ENTRYPOINT ["/app/start.sh"]
+ENTRYPOINT ["/bin/node"]
+CMD ["/data/firekylin/www/production.js"]
