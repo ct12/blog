@@ -12,5 +12,5 @@ RUN npm install
 
 VOLUME ["/data"]
 EXPOSE 8360
-ENTRYPOINT ["/bin/node"]
+ENTRYPOINT ["/usr/bin/node"]
 CMD ["/data/firekylin/www/production.js"]
